@@ -1,6 +1,6 @@
 # Polypseg
 
-PCRN for polyp segmentation (EfficientNet-B1 + Mamba encoder, BFEB decoder).
+Semi-supervised polyp segmentation. PCRN (EfficientNet-B1 + Mamba encoder, BFEB decoder) is the student, a mean-teacher EMA model mixes unlabeled images, and MedSAM-Lite refines the pseudo-labels from box prompts.
 
 ## Install
 
@@ -28,7 +28,13 @@ Predict one image:
 python demo.py --image sample.jpg --ckpt PCRN.pth --out pred.png
 ```
 
-Train (5% labeled):
+Semi-supervised training (72 labeled images, needs `lite_medsam.pth`):
+
+```bash
+python train_ssl.py --data polypData.npz --medsam_ckpt lite_medsam.pth --labeled_num 72
+```
+
+Supervised baseline (5% labeled):
 
 ```bash
 python train.py --data polypData.npz --ratio 0.05 --epochs 100

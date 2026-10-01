@@ -85,8 +85,12 @@ def main():
 
     print(f'Best val Dice: {best_dice:.4f}')
     model.load_state_dict(torch.load(ckpt_path, map_location=device))
+    run_tests(model, args.data, device)
+
+
+def run_tests(model, data_path, device):
     for name, split in TEST_SETS.items():
-        loader = DataLoader(PolypDS(args.data, split, val_transform), batch_size=1, shuffle=False)
+        loader = DataLoader(PolypDS(data_path, split, val_transform), batch_size=1, shuffle=False)
         r = valid(model, loader, device)
         print(f'{name:<13} Dice {r["Dice"] * 100:.2f} | IoU {r["IoU_poly"] * 100:.2f} '
               f'| Acc {r["ACC_overall"] * 100:.2f} | Recall {r["recall"] * 100:.2f}')
