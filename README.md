@@ -1,6 +1,6 @@
 # Polypseg
 
-Implementation of **MT-SAMPolyp**, a semi-supervised polyp segmentation framework that integrates the MedSAM foundation model into a mean-teacher scheme to improve the reliability of pseudo-labels. The student network combines an EfficientNet-B1 encoder with Mamba layers to capture both local and global context, and is trained with a boundary-aware consistency loss at the feature level.
+Implementation of **MT-SAMPolyp**, a semi-supervised approach for polyp segmentation that incorporates the MedSAM foundation model into the mean-teacher framework to enhance the reliability of pseudo-labels. The student network adopts a hybrid CNN-Mamba architecture, in which an EfficientNet-B1 encoder is coupled with Mamba layers to capture both local textures and long-range dependencies, and is optimized with a feature-level boundary-aware consistency loss.
 
 ## Install
 
