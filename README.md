@@ -1,6 +1,10 @@
 # Polypseg
 
-Semi-supervised polyp segmentation. PCRN (EfficientNet-B1 + Mamba encoder, BFEB decoder) is the student, a mean-teacher EMA model mixes unlabeled images, and MedSAM-Lite refines the pseudo-labels from box prompts.
+Official implementation of **MT-SAMPolyp**, a framework for semi-supervised polyp segmentation presented in *"MedSAM-guided Boundary-aware Consistency Learning with CNN-Mamba Architecture for Semi-Supervised Polyp Segmentation"*.
+
+Existing semi-supervised approaches based on consistency regularization and pseudo-labeling are often limited by the low reliability of pseudo-labels produced from unlabeled images, which introduces noise into training and weakens the consistency assumption. MT-SAMPolyp addresses this problem by incorporating the MedSAM foundation model into a mean-teacher framework. The teacher, updated as an exponential moving average of the student, produces predictions on unlabeled images that are used to construct mixed samples and box prompts, from which MedSAM-Lite generates refined pseudo-labels to supervise the student.
+
+The student network, PCRN, follows a hybrid CNN-Mamba design. An EfficientNet-B1 backbone extracts local texture features, while Mamba-based layers model long-range spatial dependencies and global context. The decoder employs boundary feature enhancement blocks (BFEB), and a boundary-aware consistency loss is applied at the feature level to obtain sharper edges and more accurate delineation of small or irregular polyps. The method is evaluated on five public datasets: Kvasir-SEG, CVC-ClinicDB, ETIS, CVC-ColonDB and CVC-300.
 
 ## Install
 
